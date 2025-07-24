@@ -8,10 +8,10 @@ import org.hibernate.cfg.Configuration;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a Student object
-        Student student = new Student();
-        student.setSName("Saquib");
-        student.setSAge(25);
+        // Create an Alien object
+        Alien a1 = new Alien();
+        a1.setAname("Noor");
+        a1.setTech("Java");
 
         // Configure Hibernate
         Configuration configuration = new Configuration();
@@ -24,15 +24,15 @@ public class Main {
 
             try {
                 transaction = session.beginTransaction();
-                session.persist(student);
+                session.persist(a1);  // Fixed: using object instance 'a1' instead of class 'Alien'
                 transaction.commit();
-                System.out.println("Student saved successfully: " + student);
+                System.out.println("Alien saved successfully: " + a1);
 
             } catch (PersistenceException e) {
                 if (transaction != null && transaction.isActive()) {
                     transaction.rollback();
                 }
-                System.err.println("Failed to save student: " + e.getMessage());
+                System.err.println("Failed to save alien: " + e.getMessage());
                 e.printStackTrace();
             }
 
